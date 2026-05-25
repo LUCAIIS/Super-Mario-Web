@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navMenu = document.getElementById('nav');
     const navLinks = document.querySelectorAll('.nav-link');
     const menuBtn = document.getElementById('menu-btn');
-    
+
     const menuIcon = menuBtn.querySelector('i');
 
 
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             menuIcon.classList.replace('ph-x', 'ph-list-plus');
         }
     });
- /* FUNÇÕES PARA O SLIDER */
+    /* FUNÇÕES PARA O SLIDER */
     const slides = document.querySelectorAll('.carousel-slide');
     const btnNext = document.getElementById('btn-next');
     const btnPrev = document.getElementById('btn-prev');
@@ -26,41 +26,41 @@ document.addEventListener('DOMContentLoaded', () => {
     let autoPlayTimer;
 
     //Função para mostrar o slide atual (currentSlide)
-    function showTargetSlide(index){
+    function showTargetSlide(index) {
         //Inicialmente remove todos os slides ativos
         slides.forEach(slide => slide.classList.remove('active'));
 
-        if (index >= slides.length){
+        if (index >= slides.length) {
             currentSlide = 0;
         }
-        else if (index < 0){
-            currentSlide = slides.length-1;
+        else if (index < 0) {
+            currentSlide = slides.length - 1;
         }
-        else{
+        else {
             currentSlide = index;
         }
 
         slides[currentSlide].classList.add('active');
     }
 
-    function runAutoPlay(){
-        autoPlayTimer = setInterval(()=> {
-            showTargetSlide(currentSlide+1);
+    function runAutoPlay() {
+        autoPlayTimer = setInterval(() => {
+            showTargetSlide(currentSlide + 1);
         }, 6000);
     }
 
     //Ações dos botões
-    btnNext.addEventListener('click', ()=>{
-        showTargetSlide(currentSlide+1);
+    btnNext.addEventListener('click', () => {
+        showTargetSlide(currentSlide + 1);
         resetAutoPlay();
     });
 
-    btnPrev.addEventListener('click', ()=>{
-        showTargetSlide(currentSlide-1);
+    btnPrev.addEventListener('click', () => {
+        showTargetSlide(currentSlide - 1);
         resetAutoPlay();
-    }); 
+    });
 
-    function resetAutoPlay(){
+    function resetAutoPlay() {
         clearInterval(autoPlayTimer);
         runAutoPlay();
     }
@@ -69,17 +69,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Dá a partida na transição dos slides
     runAutoPlay();
+    //Inicio dos contadores
+    ///////////////////////////
+
+    // seleciona os itens estaticos (numeros)
+    const counters = document.querySelectorAll('.stat-num');
+
+    function runCounterAnimation(el) {
+        //pega o valor data-target
+        const targetNumber = parseInt(el.getAttribute('data-target'));
+        //definir o tempo de animação
+        const durationLimit = 2000;
+
+        //inicializar uma variavel contados
+        let counterValue = 0;
+
+        //Logica: divide o numero alvo pela quantidade de frames (2000/20 = 100 frames)
+        const incrementAmount = targetNumber / (durationLimit / 20);
+        const updateVisualsTimer = setInterval(() => {
+            //adiciona o icremento no valor atual
+            counterValue += incrementAmount;
+
+            if (counterValue >= targetNumber) {
+                el.innerText = targetNumber;
+
+                clearInterval(updateVisualsTimer);
+            }
+            else {
+                el.innerText = Math.ceil(counterValue);
+            }
+        }, 20);
+    } // fecha a função run counter animation
+    // API MODERNAAAAA o observer que "observa" os elementos
+    const scrollObserver =
+        new IntersectionObserver((entries, observerInstance) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    runCounterAnimation(entry.target);
+                    observerInstance.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.6 //Pelo menos 60% do elemento tem que estar visivel
+        });
+
+    counters.forEach(CounterItem => {
+        scrollObserver.observe(CounterItem);
+    });
+
+
+    
+    
+    
+    
+    const themeBtn = document.getElementById('theme-toggle');
+    const themeIcon = themeBtn.querySelector('i');
+    
+    
+    
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.replace('ph-moon', 'ph-sun');
+    }
 
 
 
 
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
 
+        const isDark = document.body.classList.contains('dark-mode');
 
+        if (isDark) {
+            themeIcon.classList.replace('ph-moon', 'ph-sun');
+            localStorage.setItem('theme', 'dark');
 
-
-
-
-
-
-
+        } else {
+            themeIcon.classList.replace('ph-sun', 'ph-moon');
+            localStorage.setItem('theme', 'light');
+        };
+    });
 });

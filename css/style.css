@@ -3,13 +3,12 @@
     /* Brand Colors */
     --primary: #E52521; /* Cor principal (vermelho) usada em botões, destaques */
     --primary-hover: #C41E1A; /* Cor quando passa o mouse no elemento principal */
-    --accent: #FBD000; /* Cor secundária (amarelo) para destaque */
-    --accent-hover: #D4B000; /* Cor do hover do amarelo */
 
     /* Neutrals */
     --bg-main: #F0F4F8; /* Fundo principal do site */
     --bg-alt: #E2E8F0; /* Fundo alternativo (header, seções diferentes) */
-    --surface: #FFFFFF; /* Cor de superfícies (cards, caixas) */
+    --surface: #FFFFFF;
+     /* Cor de superfícies (cards, caixas) */
     --text-main: #2D3436; /* Cor principal do texto */
     --text-muted: #636E72; /* Cor de texto secundário */
 
@@ -17,6 +16,16 @@
     --radius: 8px; /* Raio padrão de borda (arredondamento) */
     --border: #dcdde1; /* Cor padrão de bordas */
 }
+body.dark-mode{
+    --bg-main: #0f172a;
+    --bg-alt: #1e293b;
+    --surface: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
 
 * { /* Remove espaçamento interno padrão | SISTEMA: reset global (padroniza comportamento entre navegadores) */
     padding: 0;
@@ -75,13 +84,15 @@ ul { /* Remove bolinhas da lista | BASE: reset de listas */
     gap: 30px; /* Espaço entre itens */
 }
 
-.nav-link { /* Anima mudança de cor | ELEMENTO: link individual do menu */
-    transition: color 0.5s;
-    font-weight: 400; /* Peso da fonte */
+.nav-link {
+    transition: color 0.5s, transform 0.3s ease;
+    font-weight: 400;
+    display: inline-block;
 }
 
-.nav-link:hover { /* Muda cor ao passar mouse | ESTADO: interação do usuário */
+.nav-link:hover {
     color: var(--primary);
+    transform: scale(1.3);
 }
 
 .header-action { /* Layout flex | LAYOUT: agrupa botões do header */
@@ -115,6 +126,10 @@ ul { /* Remove bolinhas da lista | BASE: reset de listas */
     align-items: center; /* Centraliza verticalmente */
     font-weight: 800; /* Negrito forte */
     gap: 6px; /* Espaço entre elementos do logo */
+}
+.img-logo{
+    width: 250px;
+    height: 150px;
 }
 
 .btn { /* Permite padding e largura | COMPONENTE BASE: botão reutilizável */
@@ -201,9 +216,18 @@ main { /* Evita conteúdo ficar atrás do header | LAYOUT: área principal */
 
 .carousel-content { /* Para ficar acima | ELEMENTO: conteúdo do slide */
     position: relative;
+    left: -480px;
+    top: 120px;
     z-index: 2; /* Acima da imagem */
     color: #fff; /* Texto branco */
-    max-width: 800px; /* Limita largura */
+    max-width: 400px; /* Limita largura */
+    background: rgba(0, 0, 0, 0.55);
+    border-radius: var(--radius);
+    border-color:1px solid  var(--border);
+    border-top: 5px solid var(--primary);
+    padding: 20px;
+    line-height: 1.8;
+
 }
 
 .carousel-control { /* Posiciona sobre o slide | COMPONENTE: botões do slider */
@@ -496,10 +520,59 @@ main { /* Evita conteúdo ficar atrás do header | LAYOUT: área principal */
 .w-full{
     width: 100%;
 }
-
-
-
-
+/*RODAPEEEE*/
+.footer{
+    background-color: var(--surface);
+    border-top: 1px solid var(--border);
+    padding-top: 80px;      
+}
+.footer-grid{
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+.brand-col p{
+    color: var(--text-muted);
+    margin-top: 20px;
+}
+.link-col ul{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.link-col a{
+    color: var(--text-muted);
+    transition: 0.3s;
+}
+.link-col a:hover{
+    color: var(--primary);
+}
+.social-links{
+    display: flex;
+    gap: 15px;
+}
+.social-links a{
+    width: 40px;
+    height: 40px;
+    background-color: var(--bg-alt);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+.social-links a:hover{
+    background-color: var(--primary);
+    color: white;
+}
+.footer-bottom{
+    text-align: center;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
 
 
 
