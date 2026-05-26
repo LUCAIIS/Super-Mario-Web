@@ -119,14 +119,6 @@ ul { /* Remove bolinhas da lista | BASE: reset de listas */
     display: none;
 }
 
-.logo { /* Tamanho do texto/logo | COMPONENTE: identidade visual */
-    font-size: 2rem;
-    color: var(--text-main); /* Cor */
-    display: flex; /* Layout flex */
-    align-items: center; /* Centraliza verticalmente */
-    font-weight: 800; /* Negrito forte */
-    gap: 6px; /* Espaço entre elementos do logo */
-}
 .img-logo{
     width: 250px;
     height: 150px;
@@ -169,7 +161,18 @@ ul { /* Remove bolinhas da lista | BASE: reset de listas */
     border-color: var(--primary);
     color: var(--primary);
 }
-
+.btn-enviado {
+    background-color: green;
+    color: white;
+    cursor: s-resize;
+    opacity: 0.8;
+}
+.btn-enviado:hover {
+    background: green;
+    color: white;
+    transform: none;
+    box-shadow: none;
+}
 
 main { /* Evita conteúdo ficar atrás do header | LAYOUT: área principal */
     padding-top: 70px;
@@ -270,7 +273,7 @@ main { /* Evita conteúdo ficar atrás do header | LAYOUT: área principal */
 
 }
 .section{
-    padding: 80px 0;
+    padding: 100px 0;
 
 }
 .section-title{

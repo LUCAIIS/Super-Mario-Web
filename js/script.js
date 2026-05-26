@@ -118,15 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    
-    
-    
-    
+
+
+
+
     const themeBtn = document.getElementById('theme-toggle');
     const themeIcon = themeBtn.querySelector('i');
-    
-    
-    
+
+
+
     const currentTheme = localStorage.getItem('theme');
 
     if (currentTheme === 'dark') {
@@ -151,4 +151,22 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', 'light');
         };
     });
+
+
+
+});
+const form = document.getElementById('contact-form');
+const nomeInput = document.getElementById('nome');
+const enviar = document.getElementById('btn-enviar');
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // não recarrega a página
+
+    enviar.innerText = 'Enviando...'
+    setInterval(() => {
+        enviar.innerText = 'Enviado '
+        enviar.disabled = true
+        enviar.classList.replace('btn-primary','btn-enviado')
+    },1000);
+
 });
